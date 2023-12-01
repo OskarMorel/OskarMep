@@ -1,12 +1,44 @@
-# This is a basic workflow to help you get started with Actions
-
 name: deploy
 
 on:
   workflow_dispatch:
     inputs:
-      prod:
+      envdev:
         description: 'Choisir environnement de déploiement'
         required: true
         default: 'dev'
 
+jobs:
+  First_Job:
+    name: first_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set branch based on input
+        run: |
+          if [ "${{ github.event.inputs.envdev }}" == "prod" ]; then
+            BRANCH="prod"
+          elif [ "${{ github.event.inputs.envdev }}" == "dev" ]; then
+            BRANCH="dev"
+          elif [ "${{ github.event.inputs.envdev }}" == "quali" ]; then
+            BRANCH="quali"
+          else
+            echo "Invalid environment specified"
+            exit 1
+          fi
+          echo "Deploying to branch $BRANCH"
+          git checkout -b $BRANCH
+          
+      - name: Step 1
+        run: echo Etape1
+
+      # Add more steps as needed for your deployment process
+      # ...
+
+      - name: Push changes
+        run: |
+          git add .
+          git commit -m "Deploy changes"
+          git push origin $BRANCH
