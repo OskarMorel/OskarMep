@@ -14,4 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: first step
-        run: echo "Démarrage du workflow sur ${{github.ref == 'refs/head/main'}}"
+        run: echo "Démarrage du workflow sur ${{github.ref}}"
+      - name: recuperation code
+        run: echo "Récupération de code"
+        if: ${{github.ref == 'refs/heads/main'}}
