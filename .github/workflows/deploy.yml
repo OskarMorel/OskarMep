@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: first step
         run: echo "Démarrage du workflow sur ${{github.ref}}"
-      - name: recuperation code
-        run: echo "Récupération de code"
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
         if: ${{github.ref == 'refs/heads/main'}}
+        
