@@ -21,15 +21,19 @@ jobs:
         if: ${{github.ref == 'refs/heads/main'}}
 
       - name: Déploiement production
-        run: echo "Déploiement production"
         if: github.event.inputs.envdev == 'prod'
+        run: echo "Déploiement production"
 
       - name: Déploiement dev
-        run: echo "Déploiement développement"
         if: github.event.inputs.envdev == 'dev'
+        run: echo "Déploiement développement"
 
       - name: Déploiement quali
-        run: echo "Déploiement qualité"
         if: github.event.inputs.envdev == 'quali'
-          
-        
+        run: |
+          echo "Déploiement qualification"
+          exit: 1
+
+      - name: Fin de workflow
+        if: always()
+        run: echo "FIN DE WORKFLOW"
