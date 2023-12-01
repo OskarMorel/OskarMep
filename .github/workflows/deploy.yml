@@ -23,5 +23,13 @@ jobs:
       - name: Déploiement production
         run: echo "Déploiement production"
         if: github.event.inputs.envdev == 'prod'
-        
+
+      - name: Déploiement dev
+        run: echo "Déploiement développement"
+        if: github.event.inputs.envdev == 'dev'
+
+      - name: Déploiement quali
+        run: echo "Déploiement qualité"
+        if: github.event.inputs.envdev == 'quali'
+          
         
