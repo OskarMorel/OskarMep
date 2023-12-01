@@ -1,0 +1,12 @@
+# This is a basic workflow to help you get started with Actions
+
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      prod:
+        description: 'Choisir environnement de déploiement'
+        required: true
+        default: 'dev'
+
