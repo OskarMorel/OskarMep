@@ -15,7 +15,13 @@ jobs:
     steps:
       - name: first step
         run: echo "Démarrage du workflow sur ${{github.ref}}"
+      
       - name: Checkout
         uses: actions/checkout@v4.1.1
         if: ${{github.ref == 'refs/heads/main'}}
+
+      - name: Déploiement production
+        run: echo "Déploiement production"
+        if: github.event.inputs.envdev == 'prod'
+        
         
